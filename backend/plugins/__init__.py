@@ -22,7 +22,7 @@ def get_all_plugins():
             plugins_dict.update(dict(sorted(json.load(doc).items(), key=lambda x: x[1]['priority'], reverse=True)))
     else:
         print("未找到前端插件配置文件，请检查...")
-    if os.path.exists(PLUGINS_WEB_YAML_PATH):
+    if os.path.exists(PLUGINS_BACKEND_YAML_PATH):
         with open(PLUGINS_BACKEND_YAML_PATH, 'r', encoding='utf-8') as doc:
             # 进行排序
             plugins_dict.update(dict(sorted(json.load(doc).items(), key=lambda x: x[1]['priority'], reverse=True)))
