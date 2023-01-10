@@ -59,4 +59,4 @@ class CustomPermission(BasePermission):
                 valid = ValidationApi(api, item.get('permission__api'))
                 if valid and (method == item.get('permission__method')):
                     return True
-        return True
+        return False
