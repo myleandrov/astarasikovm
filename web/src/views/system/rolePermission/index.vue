@@ -176,11 +176,11 @@ export default {
         },
         {
           value: 1,
-          label: '本部门数据权限'
+          label: '本部门及以下数据权限'
         },
         {
           value: 2,
-          label: '本部门及以下数据权限'
+          label: '本部门数据权限'
         },
         {
           value: 3,
