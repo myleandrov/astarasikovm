@@ -90,7 +90,8 @@ class UserViewSet(CustomModelViewSet):
     serializer_class = UserSerializer
     create_serializer_class = UserCreateSerializer
     update_serializer_class = UserUpdateSerializer
-    permission_classes = []
+    filter_fields = ['username','name','gender','is_active','dept']
+    search_fields = ['username','name','gender','dept__name','role__name']
 
     def user_info(self, request):
         """获取当前用户信息"""
