@@ -52,7 +52,7 @@ services:
     depends_on:
       - dvadmin-pro-mysql
     environment:
-	  - PYTHONUNBUFFERED: 1
+      - PYTHONUNBUFFERED: 1
       - DATABASE_HOST=dvadmin-pro-mysql
     volumes:
       - ./backend:/backend
