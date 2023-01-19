@@ -52,8 +52,9 @@ services:
     depends_on:
       - dvadmin-pro-mysql
     environment:
-      - PYTHONUNBUFFERED: 1
-      - DATABASE_HOST=dvadmin-pro-mysql
+      PYTHONUNBUFFERED: 1
+      DATABASE_HOST: dvadmin-pro-mysql
+      TZ: Asia/Shanghai
     volumes:
       - ./backend:/backend
       - ./logs/log:/var/log
@@ -77,7 +78,9 @@ services:
 #    depends_on:
 #      - dvadmin-pro-mysql
 #    environment:
-#      - DATABASE_HOST=dvadmin-pro-mysql
+#      PYTHONUNBUFFERED: 1
+#      DATABASE_HOST: dvadmin-pro-mysql
+#      TZ: Asia/Shanghai
 #    volumes:
 #      - ./backend:/backend
 #      - ./logs/log:/var/log
