@@ -8,6 +8,7 @@
 """
 import re
 
+from django.contrib.auth.models import AnonymousUser
 from rest_framework.permissions import BasePermission
 
 
@@ -29,11 +30,23 @@ def ValidationApi(reqApi, validApi):
         return False
 
 
+class AnonymousUserPermission(BasePermission):
+    """
+    匿名用户权限
+    """
+
+    def has_permission(self, request, view):
+        if isinstance(request.user, AnonymousUser):
+            return False
+        return True
+
+
 class CustomPermission(BasePermission):
     """自定义权限"""
 
     def has_permission(self, request, view):
-
+        if isinstance(request.user, AnonymousUser):
+            return False
         # 对ViewSet下的def方法进行权限判断
         # 当权限为空时,则可以访问
         is_head = getattr(view, 'head', None)
