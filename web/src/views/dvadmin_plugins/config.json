@@ -6,5 +6,16 @@
     "priority": 1,
     "tags": "v0.0.1",
     "type": "web"
+  },
+  "dvadmin_apscheduler_web":{
+    "name": "定时任务",
+    "enable": true,
+    "git": "https://gitee.com/dvadmin/dvadmin_apscheduler_web.git",
+    "priority": 1,
+    "tags": "v0.0.1",
+    "type": "web"
   }
 }
+
+
+

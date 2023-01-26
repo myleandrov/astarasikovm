@@ -58,14 +58,10 @@ class Post(CoreModel):
 
 class Role(CoreModel):
     name = models.CharField(max_length=64, verbose_name="角色名称", help_text="角色名称")
-    key = models.CharField(max_length=64, verbose_name="权限字符", help_text="权限字符")
+    key = models.CharField(max_length=64,unique=True, verbose_name="权限字符", help_text="权限字符")
     sort = models.IntegerField(default=1, verbose_name="角色顺序", help_text="角色顺序")
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="角色状态", help_text="角色状态")
-    ADMIN_CHOICES = (
-        (0, "否"),
-        (1, "是"),
-    )
-    admin = models.IntegerField(choices=ADMIN_CHOICES, default=0, verbose_name="是否为admin", help_text="是否为admin")
+    status = models.BooleanField(default=True, verbose_name="角色状态", help_text="角色状态")
+    admin = models.BooleanField(default=False, verbose_name="是否为admin", help_text="是否为admin")
     DATASCOPE_CHOICES = (
         (0, "仅本人数据权限"),
         (1, "本部门及以下数据权限"),
@@ -93,7 +89,7 @@ class Dept(CoreModel):
     owner = models.CharField(max_length=32, verbose_name="负责人", null=True, blank=True, help_text="负责人")
     phone = models.CharField(max_length=32, verbose_name="联系电话", null=True, blank=True, help_text="联系电话")
     email = models.EmailField(max_length=32, verbose_name="邮箱", null=True, blank=True, help_text="邮箱")
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="部门状态", null=True, blank=True,
+    status = models.BooleanField(default=True, verbose_name="部门状态", null=True, blank=True,
                                  help_text="部门状态")
     parent = models.ForeignKey(to='Dept', on_delete=models.CASCADE, default=None, verbose_name="上级部门",
                                db_constraint=False, null=True, blank=True, help_text="上级部门")
@@ -106,8 +102,8 @@ class Dept(CoreModel):
 
 
 class Button(CoreModel):
-    name = models.CharField(max_length=64, verbose_name="权限名称", help_text="权限名称")
-    value = models.CharField(max_length=64, verbose_name="权限值", help_text="权限值")
+    name = models.CharField(max_length=64,unique=True, verbose_name="权限名称", help_text="权限名称")
+    value = models.CharField(max_length=64,unique=True, verbose_name="权限值", help_text="权限值")
 
     class Meta:
         db_table = table_prefix + "system_button"
@@ -126,22 +122,14 @@ class Menu(CoreModel):
         (0, "否"),
         (1, "是"),
     )
-    is_link = models.IntegerField(choices=ISLINK_CHOICES, default=0, verbose_name="是否外链", help_text="是否外链")
-    is_catalog = models.IntegerField(choices=ISLINK_CHOICES, default=0, verbose_name="是否目录", help_text="是否目录")
+    is_link = models.BooleanField(  default=False, verbose_name="是否外链", help_text="是否外链")
+    is_catalog = models.BooleanField( default=False, verbose_name="是否目录", help_text="是否目录")
     web_path = models.CharField(max_length=128, verbose_name="路由地址", null=True, blank=True, help_text="路由地址")
     component = models.CharField(max_length=128, verbose_name="组件地址", null=True, blank=True, help_text="组件地址")
     component_name = models.CharField(max_length=50, verbose_name="组件名称", null=True, blank=True, help_text="组件名称")
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="菜单状态", help_text="菜单状态")
-    CACHE_CHOICES = (
-        (0, '禁用'),
-        (1, "启用")
-    )
-    cache = models.IntegerField(choices=CACHE_CHOICES, default=0, verbose_name="是否页面缓存", help_text="是否页面缓存")
-    VISIBLE_CHOICES = (
-        (0, '不可见'),
-        (1, "可见")
-    )
-    visible = models.IntegerField(choices=VISIBLE_CHOICES, default=1, verbose_name="侧边栏中是否显示", help_text="侧边栏中是否显示")
+    status = models.BooleanField(default=True, blank=True,verbose_name="菜单状态", help_text="菜单状态")
+    cache = models.BooleanField(default=False,blank=True, verbose_name="是否页面缓存", help_text="是否页面缓存")
+    visible = models.BooleanField(default=True,blank=True, verbose_name="侧边栏中是否显示", help_text="侧边栏中是否显示")
 
     class Meta:
         db_table = table_prefix + "system_menu"
@@ -178,11 +166,7 @@ class Dictionary(CoreModel):
     parent = models.ForeignKey(to='self', related_name='sublist', db_constraint=False, on_delete=models.PROTECT,
                                blank=True, null=True,
                                verbose_name="父级", help_text="父级")
-    STATUS_CHOICES = (
-        (0, "禁用"),
-        (1, "启用"),
-    )
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="状态", help_text="状态")
+    status = models.BooleanField(default=True,blank=True, verbose_name="状态", help_text="状态")
     sort = models.IntegerField(default=1, verbose_name="显示排序", null=True, blank=True, help_text="显示排序")
     remark = models.CharField(max_length=2000, blank=True, null=True, verbose_name="备注", help_text="备注")
 
