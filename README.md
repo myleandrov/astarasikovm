@@ -36,7 +36,7 @@
 
 - 社区：[戳我](https://bbs.django-vue-admin.com)👩‍👦‍👦
 
-- QQ群号：812482043 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=fOdnHhC8DJlRHGYSnyhoB8P5rgogA6Vs&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="django-vue-admin交流01群" title="django-vue-admin交流01群"></a>
+- QQ群号：687252418 点击链接加入群聊【dvadmin-Pro交流】：https://jq.qq.com/?_wv=1027&k=VSKYgRNn
 
 - 二维码
 
@@ -60,8 +60,8 @@ github地址：[https://github.com/dvadmin-pro/django-vue-admin-pro](https://git
 6.  🧑‍🍳操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
 7.  🧑‍🔧字典管理：对系统中经常使用的一些较为固定的数据进行维护。
 9.  📁附件管理：管理所有上传的和导出的文件和图片。
-10.  🦄~~定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。~~
-11.  🛒~~应用商店：通过插件化自定义需要使用的功能，即插即用~~
+10.  🦄定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。~~
+11.  🛒应用商店：通过插件化自定义需要使用的功能，即插即用~~
 
 
 
