@@ -119,7 +119,7 @@ export const crudOptions = (vm) => {
         },
         type: 'cascader',
         dict: {
-          url: menuPrefix + '?limit=999&status=1',
+          url: menuPrefix + '?limit=999&status=1&is_catalog=1',
           cache: false,
           isTree: true,
           value: 'id', // 数据字典中value字段的属性名
@@ -220,12 +220,11 @@ export const crudOptions = (vm) => {
         search: {
           disabled: true
         },
-
         dict: {
           data: BUTTON_WHETHER_BOOL
         },
         form: {
-          value: 0,
+          value: false,
           component: {
             placeholder: '请选择是否外链接'
           }
@@ -240,7 +239,7 @@ export const crudOptions = (vm) => {
           data: BUTTON_WHETHER_BOOL
         },
         form: {
-          value: 0,
+          value: false,
           component: {
             show(context) {
               const { form } = context
@@ -374,7 +373,7 @@ export const crudOptions = (vm) => {
           data: BUTTON_WHETHER_BOOL
         },
         form: {
-          value: 0,
+          value: false,
           component: {
             show(context) {
               const { form } = context
@@ -402,7 +401,7 @@ export const crudOptions = (vm) => {
           data: BUTTON_WHETHER_BOOL
         },
         form: {
-          value: 1,
+          value: true,
           component: {
             placeholder: '请选择侧边可见'
           },
@@ -427,7 +426,7 @@ export const crudOptions = (vm) => {
           data: BUTTON_STATUS_BOOL
         },
         form: {
-          value: 1,
+          value: true,
           component: {
             placeholder: '请选择状态'
           }
