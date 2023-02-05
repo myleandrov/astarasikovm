@@ -11,7 +11,7 @@ import qs from 'qs'
 axios.defaults.retry = 1
 axios.defaults.retryDelay = 1000
 
-export function getErrorMessage(msg) {
+export function getErrorMessage (msg) {
   if (typeof msg === 'string') {
     return msg
   }
@@ -35,12 +35,12 @@ export function getErrorMessage(msg) {
   }
   return msg
 }
-function createService() {
+function createService () {
   // 创建一个 axios 实例
   const service = axios.create({
     baseURL: process.env.VUE_APP_API_URL,
     timeout: 20000,
-    paramsSerializer: (params) => qs.stringify(params, { indices: false }),
+    paramsSerializer: (params) => qs.stringify(params, { indices: false })
   })
   // 请求拦截
   service.interceptors.request.use(
@@ -174,7 +174,7 @@ function createService() {
  * @description 创建请求方法
  * @param {Object} service axios 实例
  */
-function createRequestFunction(service) {
+function createRequestFunction (service) {
   // 校验是否为租户模式。租户模式把域名替换成 域名 加端口
   return function (config) {
     const token = util.cookies.get('token')

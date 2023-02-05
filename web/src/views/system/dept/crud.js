@@ -25,21 +25,21 @@ export const crudOptions = (vm) => {
       view: {
         thin: true,
         text: '',
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Retrieve')
         }
       },
       edit: {
         thin: true,
         text: '',
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Update')
         }
       },
       remove: {
         thin: true,
         text: '',
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Delete')
         }
       }

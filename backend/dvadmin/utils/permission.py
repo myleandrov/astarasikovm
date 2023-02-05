@@ -8,6 +8,7 @@
 """
 import re
 
+from django.db.models import F
 from rest_framework.permissions import BasePermission
 
 
@@ -54,9 +55,7 @@ class CustomPermission(BasePermission):
             method = methodList.index(method)
             if not hasattr(request.user, "role"):
                 return False
-            userApiList = request.user.role.values('permission__api', 'permission__method')  # 获取当前用户的角色拥有的所有接口
-            for item in userApiList:
-                valid = ValidationApi(api, item.get('permission__api'))
-                if valid and (method == item.get('permission__method')):
-                    return True
-        return True
+            userApiList = request.user.role.values('permission__api', 'permission__method' )  # 获取当前用户的角色拥有的所有接口
+            ApiList = [str(item.get('permission__api'))+":"+str(item.get('permission__method')) for item in userApiList]
+            now_api = api+":"+str(method)
+            return now_api in ApiList

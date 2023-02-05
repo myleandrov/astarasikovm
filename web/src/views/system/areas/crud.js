@@ -2,7 +2,6 @@ import { BUTTON_STATUS_BOOL } from '@/config/button'
 
 import { request } from '@/api/service'
 
-
 export const crudOptions = (vm) => {
   return {
     pageOptions: {
@@ -39,7 +38,7 @@ export const crudOptions = (vm) => {
         thin: true,
         text: '',
         show: false,
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Retrieve')
         }
       },
@@ -47,7 +46,7 @@ export const crudOptions = (vm) => {
         thin: true,
         text: '',
         show: false,
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Update')
         }
       },
@@ -55,7 +54,7 @@ export const crudOptions = (vm) => {
         thin: true,
         text: '',
         show: false,
-        disabled() {
+        disabled () {
           return !vm.hasPermissions('Delete')
         }
       }
@@ -108,15 +107,15 @@ export const crudOptions = (vm) => {
           disabled: false
         },
         type: 'area-selector',
-        dict: {
-          url: areaJointPrefix,
-          lazy: true,
-          isTree: true,
-          cache: false,
-          value: 'code', // 数据字典中value字段的属性名
-          label: 'name', // 数据字典中label字段的属性名
-          children: 'children' // 数据字典中children字段的属性名
-        },
+        // dict: {
+        //   url: areaJointPrefix,
+        //   lazy: true,
+        //   isTree: true,
+        //   cache: false,
+        //   value: 'code', // 数据字典中value字段的属性名
+        //   label: 'name', // 数据字典中label字段的属性名
+        //   children: 'children' // 数据字典中children字段的属性名
+        // },
         form: {
           component: {
             showAllLevels: false, // 仅显示最后一级
