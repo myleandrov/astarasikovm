@@ -9,6 +9,7 @@
 from django.urls import path, re_path
 from rest_framework import routers
 
+from dvadmin.system.views.api_white_list import ApiWhiteListViewSet
 from dvadmin.system.views.area import AreaViewSet
 from dvadmin.system.views.button import ButtonViewSet
 from dvadmin.system.views.dept import DeptViewSet
@@ -33,6 +34,8 @@ system_url.register(r'dictionary', DictionaryViewSet)
 system_url.register(r'area', AreaViewSet)
 system_url.register(r'img', ImgViewSet)
 system_url.register(r'file', FileViewSet)
+system_url.register(r'api_white_list', ApiWhiteListViewSet)
+
 
 urlpatterns = [
     re_path('role/role_id_to_menu/(?P<pk>.*?)/', RoleViewSet.as_view({'get': 'roleId_to_menu'})),
