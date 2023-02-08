@@ -142,7 +142,6 @@ export const crudOptions = (vm) => {
       {
         title: '备注',
         key: 'description',
-        
         search: {
           disabled: true
         },

@@ -16,7 +16,7 @@ from dvadmin.utils.json_response import SuccessResponse, ErrorResponse
 from dvadmin.utils.serializers import CustomModelSerializer
 from dvadmin.utils.validator import CustomUniqueValidator
 from dvadmin.utils.viewset import CustomModelViewSet
-
+from django_restql.mixins import DynamicFieldsMixin
 
 class UserSerializer(CustomModelSerializer):
     """
@@ -76,8 +76,8 @@ class UserUpdateSerializer(CustomModelSerializer):
             'post': {'required': False, 'read_only': True},
         }
 
-
-class UserViewSet(CustomModelViewSet):
+from django_restql.mixins import QueryArgumentsMixin
+class UserViewSet(QueryArgumentsMixin,CustomModelViewSet):
     """
     用户接口
     list:查询
@@ -90,7 +90,14 @@ class UserViewSet(CustomModelViewSet):
     serializer_class = UserSerializer
     create_serializer_class = UserCreateSerializer
     update_serializer_class = UserUpdateSerializer
-    filter_fields = ['name','username','gender','is_active','dept']
+    # filter_fields = ['name','username','gender','is_active','dept']
+    filter_fields = {
+        'name': ['exact','contains'],
+        'username': ['exact'],
+        'gender': ['exact'],
+        'is_active': ['exact'],
+        'dept': ['exact'],
+    }
     search_fields = ['username','name','gender','dept__name','role__name']
 
     def user_info(self, request):
