@@ -104,6 +104,7 @@ export const crudOptions = (vm) => {
         title: '姓名',
         key: 'name',
         search: {
+          key:"name__icontains",
           disabled: false
         },
         type: 'input',

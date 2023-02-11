@@ -4,6 +4,19 @@ import { urlPrefix as menuPrefix } from './api'
 import { urlPrefix as buttonPrefix } from '../button/api'
 import XEUtils from 'xe-utils'
 export const crudOptions = (vm) => {
+  //验证路由地址
+  const validateWebPath = (rule, value, callback) => {
+    const is_link = vm.getEditForm().is_link
+    let pattern = /^\/.*?/;
+    if (is_link) {
+        pattern = /^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/g;
+    } else {
+        pattern = /^\/.*?/;
+    }
+    if(!pattern.test(value)){
+      callback(new Error('请正确的地址'))
+    }
+  }
   return {
     pagination: false,
     pageOptions: {
@@ -246,7 +259,29 @@ export const crudOptions = (vm) => {
               return !form.is_catalog
             },
             placeholder: '请选择是否外链接'
-          }
+          },
+          valueChange(key ,value ,form, {getColumn, mode, component, immediate, getComponent }){
+            form.web_path = null
+            if(value){
+              getColumn('web_path').title = "外链接地址"
+              getColumn('web_path').component.placeholder='请输入外链接地址'
+              getColumn('web_path').helper= {
+                render (h) {
+                  return (< el-alert title="外链接地址,请以https|http|ftp|rtsp|mms开头" type="warning" />
+                  )
+                }
+              }
+            }else{
+              getColumn('web_path').title = "路由地址"
+              getColumn('web_path').component.placeholder='请输入路由地址'
+              getColumn('web_path').helper= {
+                render (h) {
+                  return (< el-alert title="浏览器中url的地址,请以/开头" type="warning" />
+                  )
+                }
+              }
+            }
+          },
         }
       },
       {
@@ -257,7 +292,7 @@ export const crudOptions = (vm) => {
         form: {
           rules: [
             { required: true, message: '请输入正确的路由地址' },
-            { pattern: /^\/.*?/, message: '请输入正确的路由地址' }
+            { validator: validateWebPath, trigger: 'change' }
           ],
           component: {
             show (context) {
@@ -277,7 +312,6 @@ export const crudOptions = (vm) => {
           }
         }
       },
-
       {
         title: '组件地址',
         key: 'component',
@@ -293,7 +327,7 @@ export const crudOptions = (vm) => {
           component: {
             show (context) {
               const { form } = context
-              return !form.is_catalog
+              return !form.is_catalog && !form.is_link
             },
             props: {
               clearable: true,
@@ -319,7 +353,7 @@ export const crudOptions = (vm) => {
           component: {
             show (context) {
               const { form } = context
-              return !form.is_catalog
+              return !form.is_catalog && !form.is_link
             },
             props: {
               clearable: true

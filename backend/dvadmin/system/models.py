@@ -122,7 +122,7 @@ class Menu(CoreModel):
         (0, "否"),
         (1, "是"),
     )
-    is_link = models.BooleanField(  default=False, verbose_name="是否外链", help_text="是否外链")
+    is_link = models.BooleanField(default=False, verbose_name="是否外链", help_text="是否外链")
     is_catalog = models.BooleanField( default=False, verbose_name="是否目录", help_text="是否目录")
     web_path = models.CharField(max_length=128, verbose_name="路由地址", null=True, blank=True, help_text="路由地址")
     component = models.CharField(max_length=128, verbose_name="组件地址", null=True, blank=True, help_text="组件地址")

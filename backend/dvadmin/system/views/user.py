@@ -90,14 +90,14 @@ class UserViewSet(QueryArgumentsMixin,CustomModelViewSet):
     serializer_class = UserSerializer
     create_serializer_class = UserCreateSerializer
     update_serializer_class = UserUpdateSerializer
-    # filter_fields = ['name','username','gender','is_active','dept']
-    filter_fields = {
-        'name': ['exact','contains'],
-        'username': ['exact'],
-        'gender': ['exact'],
-        'is_active': ['exact'],
-        'dept': ['exact'],
-    }
+    filter_fields = ['name','username','gender','is_active','dept']
+    # filter_fields = {
+    #     'name': ['icontains'],
+    #     'username': ['icontains'],
+    #     'gender': ['icontains'],
+    #     'is_active': ['icontains'],
+    #     'dept': ['exact'],
+    # }
     search_fields = ['username','name','gender','dept__name','role__name']
 
     def user_info(self, request):
