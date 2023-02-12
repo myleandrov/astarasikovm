@@ -58,7 +58,7 @@ export const crudOptions = (vm) => {
       width: 230,
       custom: [{
         show (index, row) {
-          if (row.web_path) {
+          if (row.web_path && !row.is_link) {
             return true
           }
           return false
