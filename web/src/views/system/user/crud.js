@@ -104,6 +104,7 @@ export const crudOptions = (vm) => {
         title: '姓名',
         key: 'name',
         search: {
+          key:"name__icontains",
           disabled: false
         },
         type: 'input',
@@ -144,7 +145,7 @@ export const crudOptions = (vm) => {
                 }
               },
               dict: {
-                // cache: true, // 表单的dict可以禁用缓存
+                cache: false, // 表单的dict可以禁用缓存
                 url: deptPrefix + '?limit=999&status=1',
                 body: {
                   status: 1
@@ -209,14 +210,20 @@ export const crudOptions = (vm) => {
       {
         title: '性别',
         key: 'gender',
-        type: 'radio',
+        type: 'select',
         dict: {
           data: [{ label: '男', value: 1 }, { label: '女', value: 0 }]
         },
         form: {
           value: 1,
+          rules: [
+            { required: true, message: '性别必填项' }
+          ],
           component: {
             span: 12
+          },
+          itemProps: {
+            class: { yxtInput: true }
           }
         },
         component: { props: { color: 'auto' } } // 自动染色

@@ -44,4 +44,4 @@ class OperationLogViewSet(CustomModelViewSet):
     """
     queryset = OperationLog.objects.order_by('-create_datetime')
     serializer_class = OperationLogSerializer
-    permission_classes = []
+    # permission_classes = []

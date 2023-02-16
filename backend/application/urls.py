@@ -90,7 +90,7 @@ if not app_config:
 else:
     url_prefix = getattr(getattr(apps, app_config), "url_prefix")
     if url_prefix:
-        url_prefix = url_prefix[0] + '/'
+        url_prefix = url_prefix + '/'
         
 # 注册路由
 try:

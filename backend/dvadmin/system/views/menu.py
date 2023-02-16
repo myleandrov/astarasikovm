@@ -96,4 +96,5 @@ class MenuViewSet(CustomModelViewSet):
             menuIds = user.role.values_list('menu__id', flat=True)
             queryset = Menu.objects.filter(id__in=menuIds, status=1)
         serializer = WebRouterSerializer(queryset, many=True, request=request)
-        return SuccessResponse(data=serializer.data, msg="获取成功")
+        data = serializer.data
+        return SuccessResponse(data=data,total=len(data),msg="获取成功")

@@ -1,4 +1,4 @@
-import { BUTTON_STATUS_NUMBER, BUTTON_WHETHER_NUMBER } from '@/config/button'
+import { BUTTON_STATUS_BOOL, BUTTON_WHETHER_BOOL } from '@/config/button'
 
 export const crudOptions = (vm) => {
   return {
@@ -161,7 +161,7 @@ export const crudOptions = (vm) => {
 
       type: 'radio',
       dict: {
-        data: BUTTON_WHETHER_NUMBER
+        data: BUTTON_WHETHER_BOOL
       },
       form: {
         value: 0,
@@ -180,7 +180,7 @@ export const crudOptions = (vm) => {
       },
       type: 'radio',
       dict: {
-        data: BUTTON_STATUS_NUMBER
+        data: BUTTON_STATUS_BOOL
       },
       form: {
         value: 1,

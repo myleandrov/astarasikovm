@@ -6,5 +6,29 @@
     "priority": 1,
     "tags": "v0.0.1",
     "type": "backend"
+  },
+  "dynamic_h5_backend": {
+    "name": "动态H5后台",
+    "enable": false,
+    "git": "https://gitee.com/dvadmin/dynamic_h5_backend.git",
+    "priority": 1,
+    "tags": "v0.0.1",
+    "type": "backend"
+  },
+   "dvadmin_apscheduler_backend":{
+    "name": "定时任务",
+    "enable": false,
+    "git": "https://gitee.com/dvadmin/dvadmin_apscheduler_backend.git",
+    "priority": 1,
+    "tags": "v0.0.1",
+    "type": "backend"
+  },
+   "upgrade_center_backend":{
+    "name": "APP升级中心后端",
+    "enable": true,
+    "git": "https://gitee.com/dvadmin/upgrade-center-backend.git",
+    "priority": 1,
+    "tags": "v0.0.1",
+    "type": "backend"
   }
 }

@@ -11,6 +11,8 @@ import re
 from django.contrib.auth.models import AnonymousUser
 from rest_framework.permissions import BasePermission
 
+from dvadmin.system.models import ApiWhiteList
+
 
 def ValidationApi(reqApi, validApi):
     """
@@ -41,6 +43,21 @@ class AnonymousUserPermission(BasePermission):
         return True
 
 
+def ReUUID(api):
+    """
+    将接口的uuid替换掉
+    :param api:
+    :return:
+    """
+    pattern = re.compile(r'[a-f\d]{4}(?:[a-f\d]{4}-){4}[a-f\d]{12}/$')
+    m = pattern.search(api)
+    if m:
+        res = api.replace(m.group(0), ".*/")
+        return res
+    else:
+        return None
+
+
 class CustomPermission(BasePermission):
     """自定义权限"""
 
@@ -63,13 +80,21 @@ class CustomPermission(BasePermission):
         else:
             api = request.path  # 当前请求接口
             method = request.method  # 当前请求方法
+            print(ApiWhiteList.objects.values("url", "method"))
             methodList = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
             method = methodList.index(method)
+            # ***接口白名单***
+            url = ReUUID(api)
+            if url:
+                apiWhiteList_instance = ApiWhiteList.objects.filter(url__regex=url, method=method).first()
+                print(apiWhiteList_instance)
+                if apiWhiteList_instance:
+                    return True
+            # ********#
             if not hasattr(request.user, "role"):
                 return False
             userApiList = request.user.role.values('permission__api', 'permission__method')  # 获取当前用户的角色拥有的所有接口
-            for item in userApiList:
-                valid = ValidationApi(api, item.get('permission__api'))
-                if valid and (method == item.get('permission__method')):
-                    return True
-        return False
+            ApiList = [str(item.get('permission__api')) + ":" + str(item.get('permission__method')) for item in
+                       userApiList]
+            now_api = api + ":" + str(method)
+            return now_api in ApiList
