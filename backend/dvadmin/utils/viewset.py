@@ -14,9 +14,9 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 
 from dvadmin.utils.filters import DataLevelPermissionsFilter
-from dvadmin.utils.json_response import SuccessResponse, ErrorResponse
+from dvadmin.utils.json_response import SuccessResponse, ErrorResponse, DetailResponse
 from dvadmin.utils.permission import CustomPermission
-
+from django_restql.mixins import QueryArgumentsMixin
 
 class CustomModelViewSet(ModelViewSet):
     """
@@ -56,7 +56,7 @@ class CustomModelViewSet(ModelViewSet):
         serializer = self.get_serializer(data=request.data, request=request)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return SuccessResponse(data=serializer.data, msg="新增成功")
+        return DetailResponse(data=serializer.data, msg="新增成功")
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -70,7 +70,7 @@ class CustomModelViewSet(ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        return SuccessResponse(data=serializer.data, msg="获取成功")
+        return DetailResponse(data=serializer.data, msg="获取成功")
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -83,12 +83,12 @@ class CustomModelViewSet(ModelViewSet):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
-        return SuccessResponse(data=serializer.data, msg="更新成功")
+        return DetailResponse(data=serializer.data, msg="更新成功")
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         self.perform_destroy(instance)
-        return SuccessResponse(data=[], msg="删除成功")
+        return DetailResponse(data=[], msg="删除成功")
 
 
     keys = openapi.Schema(description='主键列表',type=openapi.TYPE_ARRAY,items=openapi.TYPE_STRING)
@@ -99,7 +99,6 @@ class CustomModelViewSet(ModelViewSet):
     ), operation_summary='批量删除')
     @action(methods=['delete'],detail=False)
     def multiple_delete(self,request,*args,**kwargs):
-        print(request.data)
         request_data = request.data
         keys = request_data.get('keys',None)
         if keys:

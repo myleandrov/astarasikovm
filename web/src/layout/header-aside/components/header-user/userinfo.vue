@@ -101,6 +101,7 @@ import util from '@/libs/util.js'
 import { request } from '@/api/service'
 import { mapActions } from 'vuex'
 export default {
+  name:"userInfo",
   data () {
     var validatePass = (rule, value, callback) => {
       const pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}')

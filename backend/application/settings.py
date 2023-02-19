@@ -245,7 +245,6 @@ REST_FRAMEWORK = {
         'dvadmin.utils.filters.CustomDjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
-
     ),
     'DEFAULT_PAGINATION_CLASS': 'dvadmin.utils.pagination.CustomPagination',  # 自定义分页
     'DEFAULT_AUTHENTICATION_CLASSES': (

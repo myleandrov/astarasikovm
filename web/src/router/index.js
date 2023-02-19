@@ -2,7 +2,7 @@
  * @创建文件时间: 2021-06-01 22:41:21
  * @Auther: 猿小天
  * @最后修改人: 猿小天
- * @最后修改时间: 2021-08-09 21:06:19
+ * @最后修改时间: 2021-11-19 21:49:43
  * 联系Qq:1638245306
  * @文件介绍:
  */
@@ -63,9 +63,10 @@ router.beforeEach(async (to, from, next) => {
         const routes = handleRouter(ret)
         // 处理路由 得到每一级的路由设置
         store.commit('d2admin/page/init', routes)
+
         router.addRoutes(routes)
         const menu = handleAsideMenu(ret)
-        const aside = handleAsideMenu(ret.filter(value => value.visible === 1))
+        const aside = handleAsideMenu(ret.filter(value => value.visible === true))
         store.commit('d2admin/menu/asideSet', aside) // 设置侧边栏菜单
         store.commit('d2admin/search/init', menu) // 设置搜索
         next({ path: to.fullPath, replace: true, params: to.params })
