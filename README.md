@@ -4,7 +4,8 @@
 
 [预 览](https://demo.django-vue-admin.com) | [官 网文档](https://www.django-vue-admin.com) | [群聊](https://qm.qq.com/cgi-bin/qm/qr?k=fOdnHhC8DJlRHGYSnyhoB8P5rgogA6Vs&jump_from=webapi) | [社区](https://bbs.django-vue-admin.com/) | [Github](https://github.com/liqianglog/django-vue-admin) | [django-vue-admin](https://gitee.com/dvadmin/django-vue-admin-pro/)
 
-
+# 归档
+## 本项目已归档，请访问最新仓库地址：https://gitee.com/liqianglog/django-vue-admin
 
 💡 **「关于」**
 
